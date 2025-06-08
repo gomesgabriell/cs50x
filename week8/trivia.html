@@ -1,0 +1,78 @@
+<!--default styles.css-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script defer src="script.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice</h2>
+                <hr>
+                <h3>What is the capital of Brazil?</h3>
+                <button class="choice" data-correct="false">Berlin</button>
+                <button class="choice" data-correct="false">Madrid</button>
+                <button class="choice" data-correct="true">Brasilia</button>
+                <p class="feedback"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is 5 + 3?</h3>
+                <input type="text" id="response" placeholder="Your answer here">
+                <button id="submit">Submit</button>
+                <p class="feedback"></p>
+            </div>
+        </div>
+
+        <script>
+            // Part 1: Multiple Choice Logic
+            const choices = document.querySelectorAll('.choice');
+            const feedback1 = document.querySelector('.section:nth-child(1) .feedback');
+
+            choices.forEach(choice => {
+                choice.addEventListener('click', () => {
+                    // Reset all buttons
+                    choices.forEach(btn => btn.style.backgroundColor = '#d9edff');
+
+                    if (choice.dataset.correct === "true") {
+                        choice.style.backgroundColor = 'green';
+                        feedback1.textContent = "Correct!";
+                        feedback1.style.color = 'green';
+                    } else {
+                        choice.style.backgroundColor = 'red';
+                        feedback1.textContent = "Incorrect";
+                        feedback1.style.color = 'red';
+                    }
+                });
+            });
+
+            // Part 2: Free Response Logic
+            const submitButton = document.getElementById('submit');
+            const responseInput = document.getElementById('response');
+            const feedback2 = document.querySelector('.section:nth-child(2) .feedback');
+
+            submitButton.addEventListener('click', () => {
+                const userAnswer = responseInput.value.trim();
+                if (userAnswer === "8") {
+                    responseInput.style.backgroundColor = 'green';
+                    feedback2.textContent = "Correct!";
+                    feedback2.style.color = 'green';
+                } else {
+                    responseInput.style.backgroundColor = 'red';
+                    feedback2.textContent = "Incorrect";
+                    feedback2.style.color = 'red';
+                }
+            });
+        </script>
+    </body>
+</html>
